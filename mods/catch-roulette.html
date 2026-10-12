@@ -1,119 +1,139 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catch Roulette</title>
-  <meta name="description" content="A Fabric mod for Cobblemon that turns your catch chance into a slot machine roulette.">
-  <meta name="color-scheme" content="dark light">
-  <link rel="stylesheet" href="../css/site.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catch Roulette</title>
+    <meta name="description" content="Un mod de Fabric para Cobblemon que convierte tu chance de captura en una ruleta de casillas.">
+    <meta name="theme-color" content="#0b0b0d">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Catch Roulette">
+    <meta property="og:description" content="Un mod de Fabric para Cobblemon que convierte tu chance de captura en una ruleta de casillas.">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="../fonts/Doto.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mods.css">
+    <script>try { var m = localStorage.getItem('empi.motion'); document.documentElement.dataset.motion = (m ? m === 'alive' : !matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'alive' : 'calm' } catch (e) { document.documentElement.dataset.motion = 'alive' }</script>
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
+<body class="mod-page">
+    <a class="skip" href="#contenido">Ir al contenido</a>
+    <canvas id="life" aria-hidden="true"></canvas>
+    <p class="sr-only" id="dlStatus" role="status"></p>
 
-  <header class="nav">
-    <div class="wrap nav__row">
-      <a class="brand" href="../index.html">
-        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-        Empi Mods
-      </a>
-      <nav aria-label="Main">
-        <a href="../index.html#mods">Mods</a>
-        <a href="#install">Install</a>
-      </nav>
-    </div>
-  </header>
+    <header class="topbar">
+        <a class="brand" href="../index.html" aria-label="Empi Mods, inicio">
+            <svg class="logo" viewBox="0 0 20 28" aria-hidden="true" fill="currentColor">
+                <g><circle cx="2" cy="2" r="1.6"/><circle cx="2" cy="6" r="1.6"/><circle cx="2" cy="10" r="1.6"/><circle cx="2" cy="14" r="1.6"/><circle cx="2" cy="18" r="1.6"/><circle cx="2" cy="22" r="1.6"/><circle cx="2" cy="26" r="1.6"/>
+                <circle cx="18" cy="2" r="1.6"/><circle cx="18" cy="6" r="1.6"/><circle cx="18" cy="10" r="1.6"/><circle cx="18" cy="14" r="1.6"/><circle cx="18" cy="18" r="1.6"/><circle cx="18" cy="22" r="1.6"/>
+                <circle cx="6" cy="6" r="1.6"/><circle cx="10" cy="10" r="1.6"/><circle cx="14" cy="6" r="1.6"/></g>
+                <circle cx="18" cy="26" r="1.6" fill="#ff3d8b"/>
+            </svg>
+            <span>Empi Mods</span>
+        </a>
+        <nav class="nav" aria-label="Secciones">
+            <a href="../index.html#mods">Mods</a>
+            <a href="#instalar">Instalar</a>
+        </nav>
+        <a class="icon-btn" href="https://github.com/Empity001" target="_blank" rel="noopener" aria-label="Empity001 en GitHub" title="GitHub">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <button class="icon-btn" id="lifeBtn" type="button" aria-pressed="true" aria-label="Movimiento del fondo" title="Movimiento">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.5-6 5-6 7.5 0s5 6 7.5 0 3.5-4 5-3"/><path d="M2 18c2.5-4 5-4 7.5 0s5 4 7.5 0 3.5-2.5 5-2"/></svg>
+        </button>
+        <i class="progress" aria-hidden="true"></i>
+    </header>
 
-  <main id="main">
-    <div class="wrap mod-head">
-      <p class="crumb"><a href="../index.html#mods">All mods</a> / Catch Roulette</p>
-      <h1>Catch Roulette</h1>
-      <span class="status">In development</span>
-      <p class="lede">Throw a Poké Ball and watch your catch chance spin on a slot machine roulette.</p>
-    </div>
+    <main id="contenido">
+        <section class="hero wrap">
+            <div class="hero-copy">
+                <p class="crumb rise" style="--i:0"><a href="../index.html#mods">Todos los mods</a> / Catch Roulette</p>
+                <p class="chip dev rise" style="--i:0">En proceso, aún sin descarga</p>
+                <h1 class="hero-title mid rise" style="--i:1" aria-label="Catch Roulette" data-quiet><span class="line">Catch</span> <span class="line">Roulette</span></h1>
+                <p class="hero-sub rise" style="--i:2" data-quiet>Tira una ball y mira girar tu chance de captura, como en una tragamonedas.</p>
+            </div>
 
-    <div class="wrap demo-block">
-      <div class="roulette" data-roulette>
-        <div class="roulette__board" role="img" aria-label="Roulette with 100 slots, 14 of them lit"></div>
-        <div class="roulette__panel">
-          <div class="roulette__row">
-            <label for="chance-mod">Catch chance</label>
-            <output for="chance-mod">14%</output>
-          </div>
-          <input id="chance-mod" type="range" min="1" max="100" value="14">
-          <button class="btn btn--primary" type="button">Throw ball</button>
-          <p class="roulette__result" aria-live="polite"></p>
-          <p class="roulette__hint">This is a demo. In the game, the server picks the result.</p>
+            <div class="hero-demo rise" style="--i:2">
+                <div class="module roulette" data-roulette>
+                    <div class="roulette__board" role="img" aria-label="Ruleta de 100 casillas, 14 encendidas"></div>
+                    <div class="roulette__panel">
+                        <div class="roulette__row">
+                            <label for="chance-mod">Chance de captura</label>
+                            <output for="chance-mod">14%</output>
+                        </div>
+                        <input id="chance-mod" type="range" min="1" max="100" value="14">
+                        <button class="btn primary big" type="button">Tirar la ball</button>
+                        <p class="roulette__result" aria-live="polite"></p>
+                        <p class="roulette__hint">Es una demo. En el juego, el servidor decide el resultado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TODO: capturas reales del juego cuando el mod ya corra dentro de Cobblemon. -->
+
+        <section class="facts wrap reveal" aria-labelledby="factsTitle">
+            <div class="module">
+                <div class="module-head"><h2 id="factsTitle">De un vistazo</h2></div>
+                <dl class="tiles">
+                    <div class="tile"><dt>Minecraft</dt><dd class="num">1.21.1</dd><small>Java Edition</small></div>
+                    <div class="tile"><dt>Loader</dt><dd class="num">Fabric</dd><small>Con Fabric API</small></div>
+                    <div class="tile"><dt>Necesita</dt><dd class="num">Cobblemon</dd><small>1.8 o más nuevo</small></div>
+                    <div class="tile"><dt>Se instala en</dt><dd class="num">Los dos</dd><small>Cliente y servidor</small></div>
+                </dl>
+            </div>
+        </section>
+
+        <div class="wrap mod-sections">
+            <section class="module reveal" aria-labelledby="qhace">
+                <h2 id="qhace">Qué hace</h2>
+                <p>Cuando tiras una Poké Ball se abre una ruleta de 100 casillas. Si tu chance es de 14%, se encienden 14.</p>
+                <p>Cobblemon decide si capturas al Pokémon, como siempre. La ruleta es solo el espectáculo: se detiene en una casilla encendida si lo capturas, y en una apagada si se escapa.</p>
+                <p>Funciona en batallas y cuando tiras la ball a un Pokémon salvaje.</p>
+            </section>
+
+            <section class="module reveal" id="instalar" aria-labelledby="qinstalar">
+                <h2 id="qinstalar">Cómo se instala</h2>
+                <ul>
+                    <li>Minecraft Java Edition 1.21.1 con Fabric Loader.</li>
+                    <li>Fabric API y Cobblemon 1.8 o más nuevo para Fabric.</li>
+                    <li>El jar de Catch Roulette en la carpeta <code>mods</code>, en tu juego y también en el servidor.</li>
+                </ul>
+                <p>Todavía no hay descarga. Cuando salga la primera versión, aquí va el enlace a Modrinth.</p>
+            </section>
+
+            <section class="module reveal" aria-labelledby="qsaber">
+                <h2 id="qsaber">Para que lo sepas</h2>
+                <ul>
+                    <li>Va en los dos lados para que todos los jugadores vean el mismo resultado.</li>
+                    <li>La ruleta nunca cambia tus probabilidades. Solo muestra lo que Cobblemon ya decidió.</li>
+                    <li>Otros mods que cambien cómo funciona la captura pueden mostrar un chance distinto.</li>
+                </ul>
+            </section>
+
+            <section class="module empty-tear reveal" aria-labelledby="qversiones">
+                <h2 id="qversiones">Versiones</h2>
+                <p>Todavía no hay ninguna. La primera va a aparecer aquí.</p>
+            </section>
         </div>
-      </div>
-    </div>
-    <!-- TODO: add real in-game screenshots here once the mod runs in Cobblemon. -->
+    </main>
 
-    <section class="section">
-      <div class="wrap">
-        <h2>What it does</h2>
-        <div class="prose">
-          <p>When you throw a Poké Ball, a roulette of 100 slots opens on your screen. If the chance is 14%, 14 slots are lit.</p>
-          <p>Cobblemon decides whether you catch the Pokémon, as it always does. The roulette is only the show: it stops on a lit slot when you catch it, and on an unlit slot when it escapes.</p>
-          <p>It works in battles and when you throw a ball at a wild Pokémon.</p>
+    <footer class="foot" id="pie">
+        <div class="wrap foot-grid">
+            <div class="foot-brand" data-quiet>
+                <p class="foot-name">Empi Mods</p>
+                <p class="foot-line">Aquí meto mis mods ;3</p>
+            </div>
+            <a class="btn big" href="https://empity001.github.io/Empi-Emporium/">Empi Emporium</a>
+            <nav class="foot-links" data-quiet aria-label="Enlaces">
+                <a href="https://github.com/Empity001/Empi-Mods" target="_blank" rel="noopener">Código de esta página</a>
+                <a href="https://github.com/Empity001" target="_blank" rel="noopener">Empity001 en GitHub</a>
+            </nav>
         </div>
-      </div>
-    </section>
+        <p class="wrap foot-note" data-quiet>Fan project. No tiene relación con Mojang, Microsoft ni el equipo de Cobblemon.</p>
+    </footer>
 
-    <section class="section" id="install">
-      <div class="wrap">
-        <h2>Install</h2>
-        <div class="install">
-          <div>
-            <h3>You need</h3>
-            <ul>
-              <li>Minecraft Java Edition 1.21.1</li>
-              <li>Fabric Loader</li>
-              <li>Fabric API</li>
-              <li>Cobblemon 1.8 or newer for Fabric</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Then</h3>
-            <ol>
-              <li>Download the Catch Roulette jar.</li>
-              <li>Put it in the <code>mods</code> folder.</li>
-              <li>Do the same on the server.</li>
-            </ol>
-          </div>
-        </div>
-        <p class="note">There is no download yet. This page will link to Modrinth when the first version is out.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <h2>Good to know</h2>
-        <ul class="limits">
-          <li>It needs to be installed on the server too, so every player on the server sees the same result.</li>
-          <li>The roulette never changes your chances. It only shows what Cobblemon already decided.</li>
-          <li>Other mods that change how captures work may show a different chance.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <h2>Changelog</h2>
-        <div class="empty">
-          <p>No releases yet. The first version will be listed here.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <p>Empi Mods is a fan project. It is not affiliated with Mojang, Microsoft or the Cobblemon team.</p>
-      <p><a href="https://github.com/Empity001">GitHub</a></p>
-    </div>
-  </footer>
-
-  <script src="../js/roulette.js"></script>
+    <script src="../js/field.js" defer></script>
+    <script src="../js/motion.js" defer></script>
+    <script src="../js/roulette.js" defer></script>
+    <script src="../js/site.js" defer></script>
 </body>
 </html>

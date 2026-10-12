@@ -1,0 +1,63 @@
+/* Empi Mods: lo que se agrega encima de style.css (copiado de Empi Emporium, que sigue el sistema "Empi Proof Bench").
+   Aqui solo vive la ruleta y los ajustes de esta pagina. No se toca style.css para poder sincronizarlo con el de Emporium. */
+
+.hero-title.mid { font-size: clamp(3rem, 6.4vw, 5.6rem); }
+.hero-title.mid + .hero-sub { max-width: 40ch; }
+
+/* ------------------------------------------------------------ la ruleta: cien puntos, como la trama de media tinta */
+.roulette { display: grid; gap: 18px; width: 100%; max-width: 400px; margin-inline: auto; padding: 18px 20px 20px; }
+.hero-demo { display: grid; justify-items: center; }
+.roulette__board {
+    display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: clamp(6px, 1.3vw, 11px); padding: 4px 2px;
+}
+.roulette__cell {
+    aspect-ratio: 1; border-radius: 50%; background: rgb(241 239 232 / .12);
+    transition: background-color .15s var(--ease), transform .35s var(--spring);
+}
+.roulette__cell.is-caught { background: var(--text); }
+.roulette__cell.is-lit { background: var(--accent); transform: scale(1.35); }
+.roulette__cell.is-final { background: var(--accent); transform: scale(1.5); box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); }
+
+.roulette__panel { display: grid; gap: 14px; }
+.roulette__row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.roulette__row label { font: 500 12px/1.2 var(--font-mono); color: var(--text-2); padding-bottom: 6px; }
+.roulette__row output { font: 700 clamp(2.2rem, 5vw, 3rem)/1 var(--font-dot); font-variant-numeric: tabular-nums; }
+.roulette input[type="range"] { width: 100%; height: 28px; accent-color: var(--accent); }
+.roulette .btn { width: 100%; }
+.roulette .btn[disabled] { opacity: .6; cursor: progress; }
+.roulette__result { min-height: 3em; font: 500 13px/1.55 var(--font-mono); letter-spacing: -.01em; }
+.roulette__hint { font: 400 11.5px/1.4 var(--font-mono); color: var(--text-3); }
+
+/* ------------------------------------------------------------ paginas de un mod */
+.mod-page .hero { min-height: 0; padding-bottom: 32px; }
+.mod-sections { display: grid; gap: 16px; padding-top: 24px; }
+.mod-sections .module h2 { font: 500 15px/1.4 var(--font-mono); letter-spacing: -.01em; margin-bottom: 14px; }
+.mod-sections .module p { max-width: 62ch; color: var(--text-2); font-size: 15px; line-height: 1.65; }
+.mod-sections .module p + p { margin-top: 12px; }
+.mod-sections .module ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 62ch; }
+.mod-sections .module li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.6; color: var(--text-2); }
+.mod-sections .module li::before { content: ''; position: absolute; left: 3px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--text-3); }
+.mod-sections code { padding: 1px 6px; border-radius: 6px; background: rgb(255 255 255 / .07); font: 400 13px/1 var(--font-mono); color: var(--text); }
+.mod-sections .empty-tear {
+    padding-bottom: 92px;
+}
+.mod-sections .empty-tear::after {
+    content: ''; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 82px; border-radius: 0 0 var(--r-module) var(--r-module);
+    background: url('../art/tear.png') center bottom / 100% auto no-repeat; opacity: .9; filter: grayscale(1);
+    -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%); mask-image: linear-gradient(to top, #000 55%, transparent 100%);
+}
+.crumb { font: 400 12px/1.4 var(--font-mono); color: var(--text-3); }
+.crumb a { color: var(--text-2); text-decoration: none; }
+.crumb a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
+/* el numero de la primera tarjeta: decorativo, en Doto como los numerales de Emporium */
+.big-num { margin-top: auto; font: 700 clamp(5rem, 11vw, 9rem)/1 var(--font-dot); font-variant-numeric: tabular-nums; color: var(--text); opacity: .92; }
+.big-num span { color: var(--text-3); }
+.foot-note { margin-top: 24px; font: 400 11.5px/1.4 var(--font-mono); color: var(--text-3); }
+
+/* el cartel "en desarrollo": un chip, no un semaforo */
+.chip.dev { color: var(--text); }
+
+@media (max-width: 1000px) {
+    .hero-demo { justify-items: stretch; }
+}

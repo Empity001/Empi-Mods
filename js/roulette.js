@@ -2,7 +2,9 @@
    a random roll decides the result, and the roulette stops on a slot that matches it. */
 (() => {
   const SIZE = 100;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // "Tranquilo" (the switch in the top bar) and the system's reduced-motion setting both turn the chase into an instant result.
+  const systemReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const isCalm = () => document.documentElement.dataset.motion === "calm" || systemReduce.matches;
 
   // Small seeded generator so the lit slots keep the same positions for a given chance.
   function seeded(seed) {
@@ -62,7 +64,7 @@
       clearMarks();
       const caught = ORDER.slice(0, chance);
       cells.forEach((cell) => cell.classList.remove("is-caught"));
-      if (animateIn && !reduceMotion) {
+      if (animateIn && !isCalm()) {
         // The one orchestrated moment: the lit slots switch on in sequence when the page opens.
         caught.forEach((slot, k) => {
           timers.push(setTimeout(() => cells[slot].classList.add("is-caught"), 300 + k * 32));
@@ -71,7 +73,7 @@
         caught.forEach((slot) => cells[slot].classList.add("is-caught"));
       }
       output.textContent = chance + "%";
-      board.setAttribute("aria-label", "Roulette with " + SIZE + " slots, " + chance + " of them lit");
+      board.setAttribute("aria-label", "Ruleta de " + SIZE + " casillas, " + chance + " encendidas");
     }
 
     function throwBall() {
@@ -91,14 +93,14 @@
         cells.forEach((cell) => cell.classList.remove("is-lit"));
         cells[target].classList.add("is-final");
         result.textContent = caught
-          ? "Caught! The roulette stopped on a lit slot."
-          : "It got away. The roulette stopped on an unlit slot.";
+          ? "¡Capturado! La ruleta cayó en una casilla encendida."
+          : "Se escapó. La ruleta cayó en una casilla apagada.";
         busy = false;
         button.disabled = false;
         slider.disabled = false;
       };
 
-      if (reduceMotion) {
+      if (isCalm()) {
         finish();
         return;
       }
