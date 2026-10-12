@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empi Mods</title>
+  <meta name="description" content="Small Minecraft mods for Cobblemon, made by Empi_Ty and tested with friends.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav__row">
+      <a class="brand" href="index.html">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        Empi Mods
+      </a>
+      <nav aria-label="Main">
+        <a href="#mods">Mods</a>
+        <a href="#install">Install</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap hero">
+      <div class="hero__copy">
+        <h1>Small mods for Cobblemon.</h1>
+        <p class="lede">Made by Empi_Ty and tested with friends. First up: a slot machine that shows your catch chance.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="mods/catch-roulette.html">See Catch Roulette</a>
+          <a class="btn" href="#mods">All mods</a>
+        </div>
+      </div>
+
+      <div class="roulette" data-roulette>
+        <div class="roulette__board" role="img" aria-label="Roulette with 100 slots, 14 of them lit"></div>
+        <div class="roulette__panel">
+          <div class="roulette__row">
+            <label for="chance-home">Catch chance</label>
+            <output for="chance-home">14%</output>
+          </div>
+          <input id="chance-home" type="range" min="1" max="100" value="14">
+          <button class="btn btn--primary" type="button">Throw ball</button>
+          <p class="roulette__result" aria-live="polite"></p>
+          <p class="roulette__hint">This is a demo. In the game, the server picks the result.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="mods">
+      <div class="wrap">
+        <h2>Mods</h2>
+
+        <article class="feature">
+          <div class="feature__main">
+            <span class="status">In development</span>
+            <h3>Catch Roulette</h3>
+            <p class="prose">Throw a Poké Ball and a roulette of 100 slots appears. Your catch chance decides how many slots are lit, and the roulette stops on a slot that matches the real result.</p>
+            <a class="btn" href="mods/catch-roulette.html">Read more</a>
+          </div>
+          <dl class="facts">
+            <div><dt>Works with</dt><dd>Minecraft 1.21.1 and Fabric</dd></div>
+            <div><dt>Needs</dt><dd>Cobblemon 1.8 or newer, and Fabric API</dd></div>
+            <div><dt>Install on</dt><dd>Client and server</dd></div>
+            <div><dt>Download</dt><dd>Not released yet</dd></div>
+          </dl>
+        </article>
+
+        <div class="next">
+          <strong>The next mod goes here.</strong>
+          <p class="muted">Follow <a href="https://github.com/Empity001">Empity001 on GitHub</a> to see it first.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <h2>How Catch Roulette works</h2>
+        <ol class="stairs">
+          <li>
+            <h3>Throw</h3>
+            <p>You throw a Poké Ball at a Pokémon, in a battle or in the wild.</p>
+          </li>
+          <li>
+            <h3>Roll</h3>
+            <p>A roulette of 100 slots opens. A 14% chance lights 14 slots.</p>
+          </li>
+          <li>
+            <h3>Land</h3>
+            <p>The server already decided the capture. The roulette stops on a slot that matches it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="wrap">
+        <h2>Install</h2>
+        <div class="install">
+          <div>
+            <h3>You need</h3>
+            <ul>
+              <li>Minecraft Java Edition 1.21.1</li>
+              <li>Fabric Loader</li>
+              <li>Fabric API</li>
+              <li>Cobblemon 1.8 or newer for Fabric</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Then</h3>
+            <ol>
+              <li>Download the Catch Roulette jar.</li>
+              <li>Put it in the <code>mods</code> folder.</li>
+              <li>Do the same on the server.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="note">There is no download yet. This page will link to Modrinth when the first version is out.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Empi Mods is a fan project. It is not affiliated with Mojang, Microsoft or the Cobblemon team.</p>
+      <p><a href="https://github.com/Empity001">GitHub</a></p>
+    </div>
+  </footer>
+
+  <script src="js/roulette.js"></script>
+</body>
+</html>

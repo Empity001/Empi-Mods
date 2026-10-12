@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catch Roulette</title>
+  <meta name="description" content="A Fabric mod for Cobblemon that turns your catch chance into a slot machine roulette.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav__row">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        Empi Mods
+      </a>
+      <nav aria-label="Main">
+        <a href="../index.html#mods">Mods</a>
+        <a href="#install">Install</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap mod-head">
+      <p class="crumb"><a href="../index.html#mods">All mods</a> / Catch Roulette</p>
+      <h1>Catch Roulette</h1>
+      <span class="status">In development</span>
+      <p class="lede">Throw a Poké Ball and watch your catch chance spin on a slot machine roulette.</p>
+    </div>
+
+    <div class="wrap demo-block">
+      <div class="roulette" data-roulette>
+        <div class="roulette__board" role="img" aria-label="Roulette with 100 slots, 14 of them lit"></div>
+        <div class="roulette__panel">
+          <div class="roulette__row">
+            <label for="chance-mod">Catch chance</label>
+            <output for="chance-mod">14%</output>
+          </div>
+          <input id="chance-mod" type="range" min="1" max="100" value="14">
+          <button class="btn btn--primary" type="button">Throw ball</button>
+          <p class="roulette__result" aria-live="polite"></p>
+          <p class="roulette__hint">This is a demo. In the game, the server picks the result.</p>
+        </div>
+      </div>
+    </div>
+    <!-- TODO: add real in-game screenshots here once the mod runs in Cobblemon. -->
+
+    <section class="section">
+      <div class="wrap">
+        <h2>What it does</h2>
+        <div class="prose">
+          <p>When you throw a Poké Ball, a roulette of 100 slots opens on your screen. If the chance is 14%, 14 slots are lit.</p>
+          <p>Cobblemon decides whether you catch the Pokémon, as it always does. The roulette is only the show: it stops on a lit slot when you catch it, and on an unlit slot when it escapes.</p>
+          <p>It works in battles and when you throw a ball at a wild Pokémon.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="wrap">
+        <h2>Install</h2>
+        <div class="install">
+          <div>
+            <h3>You need</h3>
+            <ul>
+              <li>Minecraft Java Edition 1.21.1</li>
+              <li>Fabric Loader</li>
+              <li>Fabric API</li>
+              <li>Cobblemon 1.8 or newer for Fabric</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Then</h3>
+            <ol>
+              <li>Download the Catch Roulette jar.</li>
+              <li>Put it in the <code>mods</code> folder.</li>
+              <li>Do the same on the server.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="note">There is no download yet. This page will link to Modrinth when the first version is out.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Good to know</h2>
+        <ul class="limits">
+          <li>It needs to be installed on the server too, so every player on the server sees the same result.</li>
+          <li>The roulette never changes your chances. It only shows what Cobblemon already decided.</li>
+          <li>Other mods that change how captures work may show a different chance.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Changelog</h2>
+        <div class="empty">
+          <p>No releases yet. The first version will be listed here.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Empi Mods is a fan project. It is not affiliated with Mojang, Microsoft or the Cobblemon team.</p>
+      <p><a href="https://github.com/Empity001">GitHub</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/roulette.js"></script>
+</body>
+</html>
