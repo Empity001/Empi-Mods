@@ -8,4 +8,4 @@ Web estática de los mods de Minecraft. Guía de carpetas: `C:\Users\srelm\Proye
 - Sin guiones largos (em-dash) ni puntos medios como separador en ningún texto visible. Sin etiquetas en mayúsculas sobre los títulos.
 - La demo de la ruleta es el elemento memorable; el resto se mantiene quieto. Respetar `prefers-reduced-motion`.
 - Cada mod nuevo es una página en `mods\`. No inventar capturas ni números: las capturas deben ser reales.
-- No publicar (GitHub Pages u otro) sin permiso del usuario.
+- Publicada en https://empity001.github.io/Empi-Mods/ (repo público). Todo lo que se haga `push` a `main` queda visible para cualquiera: no subir secretos ni nada privado. Los enlaces a repos privados (como Catch-Roulette) no deben aparecer en la web.
